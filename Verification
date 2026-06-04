@@ -1,0 +1,89 @@
+DMVPN PHASE 3 - VERIFICATION GUIDE
+==================================
+
+1. UNDERLAY CONNECTIVITY
+------------------------
+Verify physical network reachability:
+
+ping 10.0.100.1
+ping 10.0.100.2
+ping 10.0.100.3
+ping 10.0.100.4
+ping 10.0.100.5
+
+Expected:
+All routers must be reachable over underlay network.
+
+---
+
+2. TUNNEL STATUS
+----------------
+show ip interface brief
+
+Expected:
+Tunnel0 on all routers should be UP/UP
+
+---
+
+3. NHRP TABLE
+-------------
+show ip nhrp
+
+Expected:
+- Hub entries (R1, R2) visible as NHS
+- Spoke entries dynamic
+- NBMA (underlay IPs) mapped correctly
+
+---
+
+4. DMVPN STATUS
+---------------
+show dmvpn
+
+Expected:
+- All spokes registered
+- Multiple NHS entries visible
+- NBMA peer addresses learned
+
+---
+
+5. SPOKE-TO-SPOKE TEST
+----------------------
+From any spoke:
+
+ping 172.16.100.X
+
+Expected behavior:
+- First packet may go via hub
+- Subsequent traffic uses direct tunnel
+- Spoke-to-spoke shortcut is formed
+
+---
+
+6. HUB FAILOVER TEST
+--------------------
+Step 1:
+Shutdown R1 interface
+
+Step 2:
+Verify failover:
+
+show ip nhrp
+show dmvpn
+
+Expected:
+- R2 becomes active hub
+- Spokes re-register automatically
+- No manual intervention required
+
+---
+
+7. FINAL VALIDATION
+-------------------
+All conditions must be true:
+
+- Tunnel UP/UP
+- NHRP tables populated
+- DMVPN peers visible
+- Spoke-to-spoke connectivity working
+- Hub failover successful
