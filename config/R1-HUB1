@@ -13,7 +13,7 @@ interface Tunnel0
  tunnel mode gre multipoint
 
  ip nhrp network-id 100
- ip nhrp authentication dmvpn123
+ ip nhrp authentication dmvpn
  ip nhrp map multicast dynamic
 
  ip nhrp redirect
