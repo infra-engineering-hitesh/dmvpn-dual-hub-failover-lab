@@ -13,7 +13,7 @@ interface Tunnel0
  tunnel mode gre multipoint
 
  ip nhrp network-id 100
- ip nhrp authentication dmvpn123
+ ip nhrp authentication dmvpn
 
  ip nhrp nhs 172.16.100.1
  ip nhrp nhs 172.16.100.2
