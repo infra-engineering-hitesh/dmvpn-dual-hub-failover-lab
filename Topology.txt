@@ -1,0 +1,15 @@
+                UNDERLAY SWITCH (10.0.100.0/24)
+
+        R1 (PRIMARY HUB)        R2 (SECONDARY HUB)
+        10.0.100.1              10.0.100.2
+              \                  /
+               \                /
+                ---- SWITCH ----
+                      |
+        -----------------------------------
+        |              |                 |
+     R3 SPOKE1     R4 SPOKE2        R5 SPOKE3
+     10.0.100.3    10.0.100.4       10.0.100.5
+
+OVERLAY NETWORK (DMVPN):
+172.16.100.0/24
