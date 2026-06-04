@@ -1,0 +1,27 @@
+hostname R4-SPOKE2
+
+interface g0/0
+ ip address 10.0.100.4 255.255.255.0
+ no shutdown
+
+interface loopback0
+ ip address 192.168.4.1 255.255.255.0
+
+interface Tunnel0
+ ip address 172.16.100.4 255.255.255.0
+ tunnel source g0/0
+ tunnel mode gre multipoint
+
+ ip nhrp network-id 100
+ ip nhrp authentication dmvpn123
+
+ ip nhrp nhs 172.16.100.1
+ ip nhrp nhs 172.16.100.2
+
+ ip nhrp map 172.16.100.1 10.0.100.1
+ ip nhrp map 172.16.100.2 10.0.100.2
+
+ ip nhrp map multicast 10.0.100.1
+ ip nhrp map multicast 10.0.100.2
+
+ ip nhrp shortcut
